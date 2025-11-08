@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+public class StudentCGPACalculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+       
+        System.out.print("Enter Student ID: ");
+        String studentID = sc.nextLine();
+
+        System.out.print("Enter number of courses: ");
+        int numCourses = sc.nextInt();
+
+        int totalCreditTaken = 0;
+        int totalCreditEarned = 0;
+        double totalGradePoints = 0;
+
+        for (int i = 1; i <= numCourses; i++) {
+            System.out.println("Course " + i + ":");
+
+            System.out.print("Credit (Max 3): ");
+            int credit = sc.nextInt();
+
+            System.out.print("AT (Max 30): ");
+            int at = sc.nextInt();
+
+            System.out.print("FE (Max 60): ");
+            int fe = sc.nextInt();
+
+            System.out.print("ME (Max 10): ");
+            int me = sc.nextInt();
+
+            int totalMarks = at + fe + me;
+            double gradePoint = 0;
+
+            
+            if (totalMarks >= 90) gradePoint = 4.0;
+            else if (totalMarks >= 85) gradePoint = 3.75;
+            else if (totalMarks >= 80) gradePoint = 3.5;
+            else if (totalMarks >= 75) gradePoint = 3.25;
+            else if (totalMarks >= 70) gradePoint = 3.0;
+            else if (totalMarks >= 65) gradePoint = 2.75;
+            else if (totalMarks >= 60) gradePoint = 2.5;
+            else if (totalMarks >= 50) gradePoint = 2.0;
+            else gradePoint = 0.0;
+
+            totalCreditTaken += credit;
+            if (gradePoint > 0.0) {
+                totalCreditEarned += credit;
+                totalGradePoints += gradePoint * credit;
+            }
+        }
+
+        double cgpa = totalGradePoints / totalCreditTaken;
+        String grade;
+
+        
+        if (cgpa >= 3.75) grade = "A+";
+        else if (cgpa >= 3.5) grade = "A";
+        else if (cgpa >= 3.25) grade = "A-";
+        else if (cgpa >= 3.0) grade = "B+";
+        else if (cgpa >= 2.75) grade = "B";
+        else if (cgpa >= 2.5) grade = "B-";
+        else if (cgpa >= 2.0) grade = "C";
+        else grade = "F";
+
+        
+        System.out.println("\nStudent ID: " + studentID);
+        System.out.println("Credit Taken: " + totalCreditTaken);
+        System.out.println("Credit Earned: " + totalCreditEarned);
+        System.out.printf("CGPA: %.2f\n", cgpa);
+        System.out.println("Grade: " + grade);
+    }
+}
